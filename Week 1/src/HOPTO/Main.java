@@ -2,29 +2,31 @@ package HOPTO;
 
 import java.util.Scanner;
 
-public class Main {
+class Main {
 	
-	private Scanner input;
-	
-	public static void main(String[] args) {
-		new Main().solve();
+	public static void main(String[] args) {		
+		Main test = new Main();
+		test.solve();
+		System.exit(0);
 	}	
 	
-	private void solve() {
+	void solve() {
+		Scanner input;
 		input = new Scanner(System.in);
-		int num = input.nextInt();
+		long num = input.nextInt();
 		
 		for (int i = 0; i < num; i++) {
-			int set = input.nextInt();
-			int value = input.nextInt();
+			long set = input.nextInt();
+			long value = input.nextInt();
 			value = this.calculate(value);
-			System.out.printf("%d %d", set, value);
+			System.out.printf("%d %d\n", set, value);
 		}
+		input.close();		
 	}
 	
-	private int calculate(int start) {
-		int max = start;
-		int val = start;
+	long calculate(long start) {
+		long max = start;
+		long val = start;
 		while (val != 1) {
 			if (val > max) {
 				max = val;

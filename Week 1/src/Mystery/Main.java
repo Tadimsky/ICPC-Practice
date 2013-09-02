@@ -11,6 +11,8 @@ public class Main {
 	public static void main(String[] args) {		
 		new Main().solve();
 
+
+		
 	}
 	
 	void solve() {
@@ -20,23 +22,23 @@ public class Main {
 		for (int i = 0; i < num; i++) {
 			int dataset = readIntLine();
 			//s.nextLine();			
-			char[] value = s.nextLine().trim().toCharArray();
+			char[] value = s.nextLine().toCharArray();
 			int letters = readIntLine();
 			int marker = 0;
-			
-			String[] digits = s.nextLine().split(" ");			
+									
 			System.out.print(dataset + " ");			
 			for (int j = 0; j < letters; j++) {
-				int change = Integer.parseInt(digits[j]);
+				int change = s.nextInt();
 				marker += change;
 				if (marker >= value.length) {
 					marker = marker - value.length;
 				}
 				if (marker < 0) {
-					marker = value.length + marker ;
+					marker = value.length + marker;
 				}
 				System.out.print(value[marker]);
 			}			
+			s.nextLine();
 			System.out.println();
 		}
 	}

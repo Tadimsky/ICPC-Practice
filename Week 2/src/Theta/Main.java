@@ -8,6 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new Main().solve();
+		System.out.println("lo");
 	}
 	
 	void solve() {
@@ -19,6 +20,9 @@ public class Main {
 			 * The string pattern and the weight to get here.
 			 */
 			HashMap<String, Integer> list = new HashMap<String, Integer>();
+			HashMap<String, String> path = new HashMap<String, String>();
+			HashMap<String, String> path2 = new HashMap<String, String>();
+			
 			int set = s.nextInt();			
 			String order = s.next();
 			String moves = (order + "_");		
@@ -26,22 +30,22 @@ public class Main {
 			
 			Queue<String> bfs = new LinkedList<String>();
 			bfs.add(moves);			
+			
 			int index = moves.length() - 1;
 			
 			while (!list.containsKey("ABCDEF_")) {
 				moves = bfs.poll();				
 				ArrayList<String[]> new_moves = get_moves(moves);
 				for (String s : new_moves.get(0)) {
-					System.out.println(s);
-					/*
+					System.out.println(s);					
 					if (!list.containsKey(s)) {
 						list.put(s, list.get(moves) + 1);
 						bfs.add(s);
-					}
-					*/
+					}					
 				}	
 				return;
 			}
+			
 		}
 	}
 	

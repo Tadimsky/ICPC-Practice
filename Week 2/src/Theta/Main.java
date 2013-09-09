@@ -7,8 +7,9 @@ public class Main {
 	Scanner s ;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Main().solve();
 		System.out.println("lo");
+		new Main().solve();
+		
 	}
 	
 	void solve() {
@@ -34,24 +35,30 @@ public class Main {
 			int index = moves.length() - 1;
 			
 			while (!list.containsKey("ABCDEF_")) {
-				moves = bfs.poll();				
+				moves = bfs.poll();
+				if (moves == null) {
+					System.out.println("Invalid");
+					return;
+				}
+				
 				ArrayList<String[]> new_moves = get_moves(moves);
-				for (String s : new_moves.get(0)) {
-					System.out.println(s);					
-					if (!list.containsKey(s)) {
-						list.put(s, list.get(moves) + 1);
-						bfs.add(s);
+				for (String[] s : new_moves) {				
+					if (!list.containsKey(s[0])) {
+						System.out.println(s[0]);	
+						list.put(s[0], list.get(moves) + 1);
+						bfs.add(s[0]);
 					}					
-				}	
-				return;
+				}				
 			}
-			
 		}
 	}
 	
 	ArrayList<String[]> get_moves(String current) {
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		int index = current.indexOf('_');
+		if (index == -1) {
+			return result;
+		}
 		char[] move = current.toCharArray();
 		
 		/*
@@ -65,23 +72,48 @@ public class Main {
 		else {
 			if (index == 1 || index == 4) {
 				result.add(string_swap(current, 6,  index));
-			}
-			else {
-				result.add(string_swap(current, index-1,  index));
+			}			
+			if (index == 0) {
+				result.add(string_swap(current, current.length() - 2,  index));
 				result.add(string_swap(current, index+1,  index));
 			}
+			else {
+				if (index == current.length() - 2) {
+					result.add(string_swap(current, 0,  index));
+					result.add(string_swap(current, index-1,  index));
+				}
+				else {
+					result.add(string_swap(current, index-1,  index));
+					result.add(string_swap(current, index+1,  index));		
+				}
+			}	
 		}
 		return result;
 	}
 	
 	String[] string_swap(String s, int character, int space) {
+		String[] arr = new String[2];
+		if (character < 0) {
+			character = s.length() - character;
+		}
+		if (space < 0) {
+			space = s.length() - space;
+		}
+		if (character >= s.length() - 1) {
+			character = character - s.length();
+		}
+		if (space >= s.length() - 1) {
+			space = space - s.length();
+		}		
+		
+		
 		char[] next = s.toCharArray();
 		char f = next[character];
 		next[character] = '_';
 		next[space] = f;
-		String[] arr = new String[2];
+		
 		arr[0] = new String(next);
-		arr[1] = s.substring(space,space + 1);
+		arr[1] = s.substring(character,character + 1);
 		return arr;
 	}
 

@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Main {
 
+	private static final String END_CASE = "ABCDEF_";
 	Scanner s ;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -34,21 +35,37 @@ public class Main {
 			
 			int index = moves.length() - 1;
 			
-			while (!list.containsKey("ABCDEF_")) {
+			while (!list.containsKey(END_CASE)) {
 				moves = bfs.poll();
 				if (moves == null) {
-					System.out.println("Invalid");
-					return;
+					break;
 				}
-				
 				ArrayList<String[]> new_moves = get_moves(moves);
 				for (String[] s : new_moves) {				
-					if (!list.containsKey(s[0])) {
-						System.out.println(s[0]);	
+					if (!list.containsKey(s[0])) {	
 						list.put(s[0], list.get(moves) + 1);
-						bfs.add(s[0]);
+						path.put(s[0], moves);
+						path2.put(s[0], s[1]);
+						bfs.add(s[0]);						
 					}					
 				}				
+			}
+			
+			System.out.printf("%d ", i + 1);
+			if (list.containsKey(END_CASE)) {
+				System.out.printf("%d", list.get(END_CASE));
+				String start = END_CASE;
+				String full_path = "";
+				StringBuilder f = new StringBuilder();
+				while (path.containsKey(start)) {
+					f.append(path2.get(start));
+					start = path.get(start);
+				}
+				System.out.printf(" %s", f.reverse().toString());				
+				System.out.printf("\n");
+			}
+			else {
+				System.out.printf("NO SOLUTION\n");
 			}
 		}
 	}
@@ -66,18 +83,22 @@ public class Main {
 		 */
 		
 		if (index == 6) {
+			// Swap the one's next to it.
 			result.add(string_swap(current, 1, index));
 			result.add(string_swap(current, 4, index));
 		}
 		else {
+			// Swap with the center
 			if (index == 1 || index == 4) {
 				result.add(string_swap(current, 6,  index));
 			}			
+			// If 0, wrap back to 5 and 
 			if (index == 0) {
 				result.add(string_swap(current, current.length() - 2,  index));
 				result.add(string_swap(current, index+1,  index));
 			}
 			else {
+				// If the 2nd last one, wrap around to 0
 				if (index == current.length() - 2) {
 					result.add(string_swap(current, 0,  index));
 					result.add(string_swap(current, index-1,  index));
@@ -99,10 +120,10 @@ public class Main {
 		if (space < 0) {
 			space = s.length() - space;
 		}
-		if (character >= s.length() - 1) {
+		if (character >= s.length()) {
 			character = character - s.length();
 		}
-		if (space >= s.length() - 1) {
+		if (space >= s.length()) {
 			space = space - s.length();
 		}		
 		

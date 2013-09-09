@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="Mystery/" kind="src" path="Week 1/src"/>
+	<classpathentry kind="src" path="Week 1/src/Mystery"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="Week 1/bin"/>
+</classpath>

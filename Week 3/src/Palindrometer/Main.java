@@ -20,7 +20,7 @@ public class Main {
 			
 			if (is_pal(f)) {
 				// done;
-				continue
+				continue;
 			}
 			
 			int start2 = f.length() / 2;
@@ -47,5 +47,6 @@ public class Main {
 		int r = Integer.parseInt(right);
 		
 		int diff = Math.abs(l - r);
+		return "";
 	}
 }

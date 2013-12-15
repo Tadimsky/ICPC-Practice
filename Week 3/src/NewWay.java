@@ -56,9 +56,9 @@ public class NewWay {
 				fi = fi + add;
 				int diff = fi - la;
 				int new_num = original_num + diff;
-				if (f.length() % 2 == 0) {
+				//if (f.length() % 2 == 0) {
 					new_num = new_num + add / 10;
-				}
+				//}
 				diff = new_num - original_num;
 				System.out.printf("%d\n", diff);
 			}

@@ -1,4 +1,4 @@
-package Mystery;
+
 import java.util.Scanner;
 
 public class Main {
